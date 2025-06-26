@@ -22,6 +22,7 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\DukeVineland.Dtos\DukeVineland.Dtos.csproj" />
+    <ProjectReference Include="..\DukeVineland.Services\DukeVineland.Services.csproj" />
   </ItemGroup>
 
 </Project>

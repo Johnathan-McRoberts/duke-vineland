@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DukeVineland.Server", "Duke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DukeVineland.Dtos", "DukeVineland.Dtos\DukeVineland.Dtos.csproj", "{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DukeVineland.Repositories", "DukeVineland.Repositories\DukeVineland.Repositories.csproj", "{7FAB41E7-1175-486C-BAB2-D8AF0B8AD294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DukeVineland.Services", "DukeVineland.Services\DukeVineland.Services.csproj", "{C91A6FA4-954B-4C9B-BEC1-DADE848C7233}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FAB41E7-1175-486C-BAB2-D8AF0B8AD294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FAB41E7-1175-486C-BAB2-D8AF0B8AD294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FAB41E7-1175-486C-BAB2-D8AF0B8AD294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FAB41E7-1175-486C-BAB2-D8AF0B8AD294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C91A6FA4-954B-4C9B-BEC1-DADE848C7233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C91A6FA4-954B-4C9B-BEC1-DADE848C7233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C91A6FA4-954B-4C9B-BEC1-DADE848C7233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C91A6FA4-954B-4C9B-BEC1-DADE848C7233}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

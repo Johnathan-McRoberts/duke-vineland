@@ -1,4 +1,6 @@
+using DukeVineland.Repositories.Extensions;
 using DukeVineland.Server.Extensions;
+using DukeVineland.Services.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddMongoDatabaseConfig(builder.Configuration);
+builder.Services.AddRepositories();
+builder.Services.AddServices();
 
 WebApplication app = builder.Build();
 

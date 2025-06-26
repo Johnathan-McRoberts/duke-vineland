@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using DukeVineland.Dtos.Configuration;
 
+using DukeVineland.Services.Interfaces;
+
 namespace DukeVineland.Server.Controllers
 {
     [ApiController]
@@ -15,12 +17,15 @@ namespace DukeVineland.Server.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly MongoDatabaseConfig _mongoDatabaseConfig;
+        private readonly IBookReaderService _bookReaderService;
 
         public WeatherForecastController(
             MongoDatabaseConfig mongoDatabaseConfig,
+            IBookReaderService bookReaderService,
             ILogger<WeatherForecastController> logger)
         {
             _mongoDatabaseConfig = mongoDatabaseConfig;
+            _bookReaderService = bookReaderService;
             _logger = logger;
         }
 
@@ -34,7 +39,7 @@ namespace DukeVineland.Server.Controllers
                 Summary =
                     Summaries[Random.Shared.Next(Summaries.Length)]
                         + " - "
-                        + _mongoDatabaseConfig.RemoteUserName
+                        + _bookReaderService.Name
 
             })
             .ToArray();
