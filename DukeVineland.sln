@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "dukevineland.client", "dukevineland.client\dukevineland.client.esproj", "{B8A3434B-374A-3FD2-DA2B-3DBA188D2416}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DukeVineland.Server", "DukeVineland.Server\DukeVineland.Server.csproj", "{35975044-007C-4547-AAF0-2682822C590F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DukeVineland.Dtos", "DukeVineland.Dtos\DukeVineland.Dtos.csproj", "{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{35975044-007C-4547-AAF0-2682822C590F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35975044-007C-4547-AAF0-2682822C590F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35975044-007C-4547-AAF0-2682822C590F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDBCB3CD-3ADF-402F-B24F-ADFAAAD48795}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

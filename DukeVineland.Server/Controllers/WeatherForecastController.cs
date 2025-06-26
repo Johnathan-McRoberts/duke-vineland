@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
+using DukeVineland.Dtos.Configuration;
+
 namespace DukeVineland.Server.Controllers
 {
     [ApiController]
@@ -12,9 +14,13 @@ namespace DukeVineland.Server.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly MongoDatabaseConfig _mongoDatabaseConfig;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(
+            MongoDatabaseConfig mongoDatabaseConfig,
+            ILogger<WeatherForecastController> logger)
         {
+            _mongoDatabaseConfig = mongoDatabaseConfig;
             _logger = logger;
         }
 
@@ -25,7 +31,11 @@ namespace DukeVineland.Server.Controllers
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+                Summary =
+                    Summaries[Random.Shared.Next(Summaries.Length)]
+                        + " - "
+                        + _mongoDatabaseConfig.RemoteUserName
+
             })
             .ToArray();
         }
