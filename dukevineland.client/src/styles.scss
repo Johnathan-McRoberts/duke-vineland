@@ -4,6 +4,7 @@
 @import 'node_modules/bootstrap/scss/_variables.scss';
 @import 'node_modules/bootstrap/scss/_mixins.scss';*/
 
+/*@import "node_modules/daemonite-material/assets/scss/material";*/
 /*@use '@angular/material' as mat;
 
 body {
@@ -78,16 +79,8 @@ button {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}*/
-
-
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
 
 @use '@angular/material' as mat;
 

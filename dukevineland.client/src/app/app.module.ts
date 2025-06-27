@@ -10,6 +10,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -24,7 +30,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
     UserLoginModule,
 
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+
+    NgbModule,
+    NgbNavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

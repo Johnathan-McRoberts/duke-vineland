@@ -1,49 +1,43 @@
-<!--<h1 id="tableLabel">Weather forecast</h1>
+<div class="container-fluid">
 
-<p>This component demonstrates fetching data from the server.</p>
+  <!--<h1 id="tableLabel">Weather forecast</h1>-->
 
-<p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
-
-<table *ngIf="forecasts">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Temp. (C)</th>
-      <th>Temp. (F)</th>
-      <th>Summary</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let forecast of forecasts">
-      <td>{{ forecast.date }}</td>
-      <td>{{ forecast.temperatureC }}</td>
-      <td>{{ forecast.temperatureF }}</td>
-      <td>{{ forecast.summary }}</td>
-    </tr>
-  </tbody>
-</table>
-
-<mat-slide-toggle>Toggle me!</mat-slide-toggle>
-<app-users-overview></app-users-overview>-->
-<!--<app-header />-->
-
-
-<h1 id="tableLabel">Weather forecast</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-<button (click)="navigateToUsers()">Users</button>
-<button (click)="navigateToCharts()">Charts</button>
-<button (click)="navigateToTables()">Tables</button>
-<button (click)="navigateToForms()">Forms</button>
-<button (click)="navigateToInputExport()">Import/Export</button>
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink (click)="navigateToUsers()" matButton extended class="centered-icons">
+        <mat-icon>account_circle</mat-icon>
+        <span>&nbsp; Users</span>
+      </button>
+    </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink (click)="navigateToCharts()" matButton extended class="centered-icons">
+        <mat-icon>analytics</mat-icon>
+        <span>&nbsp; Charts</span>
+      </button>
+    </li>
+    <li [ngbNavItem]="3">
+      <button ngbNavLink (click)="navigateToTables()" matButton extended class="centered-icons">
+        <mat-icon>view_list</mat-icon>
+        <span>&nbsp; Tables</span>
+      </button>
+    </li>
+    <li [ngbNavItem]="4">
+      <button ngbNavLink (click)="navigateToForms()" matButton extended class="centered-icons">
+        <mat-icon>edit</mat-icon>
+        <span>&nbsp; Forms</span>
+      </button>
+    </li>
+    <li [ngbNavItem]="5">
+      <button ngbNavLink (click)="navigateToInputExport()" matButton extended class="centered-icons">
+        <mat-icon>download</mat-icon>
+        <span>&nbsp; Import/Export</span>
+      </button>
+    </li>
+  </ul>
 
 
+  <router-outlet />  <!-- Angular inserts your route content here -->
 
+  <!--<mat-slide-toggle>Toggle me!</mat-slide-toggle>-->
 
-<router-outlet />  <!-- Angular inserts your route content here -->
-
-
-
-<mat-slide-toggle>Toggle me!</mat-slide-toggle>
-<!--<app-footer />-->
+</div>
