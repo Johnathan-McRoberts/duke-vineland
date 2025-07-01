@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DukeVineland.Domain\DukeVineland.Domain.csproj" />
     <ProjectReference Include="..\DukeVineland.Dtos\DukeVineland.Dtos.csproj" />
   </ItemGroup>
 

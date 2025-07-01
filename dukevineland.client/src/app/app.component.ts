@@ -11,41 +11,18 @@ interface WeatherForecast {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  active = 1;
+  active = 0;
   private router = inject(Router);
   public forecasts: WeatherForecast[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getForecasts();
   }
-
-
-  navigateToUsers() {
-    // Standard navigation
-    this.router.navigate(['/users']);
-  }
-  navigateToCharts() {
-    // Standard navigation
-    this.router.navigate(['/charts']);
-  }
-  navigateToTables() {
-    // Standard navigation
-    this.router.navigate(['/tables']);
-  }
-  navigateToForms() {
-    // Standard navigation
-    this.router.navigate(['/forms']);
-  }
-  navigateToInputExport() {
-    // Standard navigation
-    this.router.navigate(['/import-export']);
-  }
-
 
   getForecasts() {
     this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(

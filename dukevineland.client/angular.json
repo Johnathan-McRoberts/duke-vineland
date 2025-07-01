@@ -5,7 +5,10 @@
   "projects": {
     "dukevineland.client": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": null,
+      "@schematics/angular:component": {
+        "style": "scss"
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",

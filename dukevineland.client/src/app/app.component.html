@@ -1,43 +1,10 @@
 <div class="container-fluid">
 
-  <!--<h1 id="tableLabel">Weather forecast</h1>-->
+  <div>
+    <app-main-toolbar></app-main-toolbar>
+  </div>
 
-  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
-    <li [ngbNavItem]="1">
-      <button ngbNavLink (click)="navigateToUsers()" matButton extended class="centered-icons">
-        <mat-icon>account_circle</mat-icon>
-        <span>&nbsp; Users</span>
-      </button>
-    </li>
-    <li [ngbNavItem]="2">
-      <button ngbNavLink (click)="navigateToCharts()" matButton extended class="centered-icons">
-        <mat-icon>analytics</mat-icon>
-        <span>&nbsp; Charts</span>
-      </button>
-    </li>
-    <li [ngbNavItem]="3">
-      <button ngbNavLink (click)="navigateToTables()" matButton extended class="centered-icons">
-        <mat-icon>view_list</mat-icon>
-        <span>&nbsp; Tables</span>
-      </button>
-    </li>
-    <li [ngbNavItem]="4">
-      <button ngbNavLink (click)="navigateToForms()" matButton extended class="centered-icons">
-        <mat-icon>edit</mat-icon>
-        <span>&nbsp; Forms</span>
-      </button>
-    </li>
-    <li [ngbNavItem]="5">
-      <button ngbNavLink (click)="navigateToInputExport()" matButton extended class="centered-icons">
-        <mat-icon>download</mat-icon>
-        <span>&nbsp; Import/Export</span>
-      </button>
-    </li>
-  </ul>
-
-
-  <router-outlet />  <!-- Angular inserts your route content here -->
-
-  <!--<mat-slide-toggle>Toggle me!</mat-slide-toggle>-->
-
+  <div>
+    <router-outlet />
+  </div>
 </div>

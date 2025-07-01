@@ -1,13 +1,11 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { UserLoginModule } from './user-login/user-login.module';
-import { SharedModule } from './shared/shared.module';
+import { LoggedInService } from './services/logged-in.service';
+import { UsersService } from './services/users.service';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -19,19 +17,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 @NgModule({
   declarations: [
-    AppComponent
+    MainToolbarComponent
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-
-    UserLoginModule,
-    SharedModule,
 
     MatSlideToggleModule,
     MatIconModule,
@@ -42,7 +34,9 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     NgbNavModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports:
+    [
+      MainToolbarComponent
+    ]
 })
-export class AppModule { }
+export class SharedModule { }

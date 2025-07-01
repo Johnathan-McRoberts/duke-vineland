@@ -8,26 +8,27 @@ import { FormsModule } from './forms/forms.module';
 import { ImportExportModule } from './import-export/import-export.module';
 import { TablesModule } from './tables/tables.module';
 import { UserLoginModule } from './user-login/user-login.module';
+import { SharedModule } from './shared/shared.module';
 
 import { UsersOverviewComponent } from './user-login/components/users-overview/users-overview.component';
+import { LoginComponent } from './user-login/components/login/login.component';
 import { ChartsOverviewComponent } from './charts/components/charts-overview/charts-overview.component';
 import { FormsOverviewComponent } from './forms/components/forms-overview/forms-overview.component';
 import { TablesOverviewComponent } from './tables/components/tables-overview/tables-overview.component';
 import { ImportExportOverviewComponent } from './import-export/components/import-export-overview/import-export-overview.component';
 
-
 const routes: Routes = [
   {
     path: '',
-    title: 'User Login',
+    title: 'Login',
     pathMatch: 'full',
-    component: UsersOverviewComponent,
+    component: LoginComponent,
   },
   {
-    path: 'users',
-    title: 'User Login',
+    path: 'login',
+    title: 'Login',
     pathMatch: 'full',
-    component: UsersOverviewComponent,
+    component: LoginComponent,
   },
   {
     path: 'tables',
@@ -52,7 +53,13 @@ const routes: Routes = [
     title: 'Import/Export',
     pathMatch: 'full',
     component: ImportExportOverviewComponent,
-  }
+  },
+  {
+    path: 'users',
+    title: 'Users',
+    pathMatch: 'full',
+    component: UsersOverviewComponent,
+  },
 ];
 
 
@@ -67,6 +74,7 @@ const routes: Routes = [
     ImportExportModule,
     TablesModule,
     UserLoginModule,
+    SharedModule,
   ],
   exports: [RouterModule],
 })
