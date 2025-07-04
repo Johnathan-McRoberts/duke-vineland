@@ -15,6 +15,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
+//import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+
+
+
 
 
 @NgModule({
@@ -33,6 +39,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 
     NgbModule,
     NgbNavModule,
+
+    FormsModule,
+    ReactiveFormsModule, 
+
 
     CommonModule
   ],
