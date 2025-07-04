@@ -9,7 +9,7 @@ using System;
 namespace DukeVineland.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserLoginController : ControllerBase
     {
         private IUserLoginService _userLoginService;
@@ -29,6 +29,7 @@ namespace DukeVineland.Server.Controllers
         /// <param name="request">The check new user login to try to add.</param>
         /// <returns>The action result.</returns>
         [HttpPost]
+        [Route("log-in")]
         public async Task<IActionResult> Post([FromBody] UserLoginRequest request)
         {
             _logger.LogInformation($"Logging In {request.Name}");
