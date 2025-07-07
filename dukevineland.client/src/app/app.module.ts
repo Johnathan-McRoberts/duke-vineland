@@ -14,6 +14,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -37,6 +38,7 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
+    MatSnackBarModule,
     MatToolbarModule,
 
     NgbModule,

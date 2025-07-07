@@ -11,38 +11,40 @@ import { UserLoginResponse } from '../models/user-login-response';
 export class LoggedInService {
 
   private http = inject(HttpClient);
+
+  private currentUser: UserLoginResponse | null = null;
+
+  public get isLoggedIn(): boolean {
+    return this.currentUser !== null;
+  }
+
+  public get loggedInUserName(): string {
+    return (this.currentUser !== null) ? this.currentUser.name : '';
+  }
+
+  public setLoggedInUser(user: UserLoginResponse): void {
+    this.currentUser = user;
+  }
+
   constructor() { }
-/*  '/weatherforecast'*/
+
   getUserLogin(
     userName: string,
     userPassword: string): Observable<UserLoginResponse> {
 
-      // set up the request payload
+    // set up the request payload
     const request: UserLoginRequest = {
       name: userName,
       password: userPassword,
     }
 
     //set up the url
-    //const url: string = 'UserLogin';
-    //const url: string = '/api/UserLogin/log-in';
+    const url: string = '/api/UserLogin/log-in';
 
-    //const url: string = 'https://localhost:7297/api/UserLogin/log-in';
-    const url: string = '/weatherforecast/log-in';
+    // and the query parameters
     const queryParams: string = '?Name=' + userName + '&Password=' + userPassword;
-    
-    //const headers = new HttpHeaders().set('Content-Type', 'application');
 
-    //const httpOptions =
-    //{
-    //  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    //};
-
-    //?Name = JMcR & Password=Pukka1234
-
+    // return the observable
     return this.http.get<UserLoginResponse>(url + queryParams);
-
-    //return this.http
-    //  .post<UserLoginResponse>(url, request, { headers: headers });
   }
 }

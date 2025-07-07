@@ -1,5 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms'
+
+import {
+  MatSnackBar,
+  MatSnackBarAction,
+  MatSnackBarActions,
+  MatSnackBarLabel,
+  MatSnackBarRef,
+} from '@angular/material/snack-bar';
+import { UserLoginResponseCode } from '../../../shared/models/user-login-response-code';
+
 import { LoggedInService } from '../../../shared/services/logged-in.service';
 //import { LoggedInService } from './logged-in.service';
 
@@ -10,7 +19,12 @@ import { LoggedInService } from '../../../shared/services/logged-in.service';
 })
 export class LoginComponent {
 
-  private loggedInService = inject(LoggedInService);
+  private _loggedInService = inject(LoggedInService);
+  private _snackBar = inject(MatSnackBar);
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
 
   protected readonly userNameValue = signal<string>('');
   protected readonly passwordValue = signal<string>('');
@@ -27,19 +41,29 @@ export class LoginComponent {
 
 
   submitLogin() {
-    // Standard navigation
-    /*this.router.navigate(['/import-export']);*/
+
     console.log("submit login for : u = " + this.userNameValue() + " p = " + this.passwordValue());
 
     this
-      .loggedInService
+      ._loggedInService
       .getUserLogin(
-            this.userNameValue(),
-            this.passwordValue())
+        this.userNameValue(),
+        this.passwordValue())
       .subscribe(
-        resp =>
-        {
+        resp => {
           console.log('Updated resp:', JSON.stringify(resp));
+          if (resp !== null && resp !== undefined) {
+
+            if (resp.errorCode === UserLoginResponseCode.Success) {
+              this.openSnackBar('Login successful!', 'OK');
+            }
+            else {
+
+              this.openSnackBar('Login failed: ' + resp.failReason, 'OK');
+            }
+
+            this._loggedInService.setLoggedInUser(resp);
+          }
         });
   }
 }

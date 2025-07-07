@@ -16,6 +16,7 @@ import { ChartsOverviewComponent } from './charts/components/charts-overview/cha
 import { FormsOverviewComponent } from './forms/components/forms-overview/forms-overview.component';
 import { TablesOverviewComponent } from './tables/components/tables-overview/tables-overview.component';
 import { ImportExportOverviewComponent } from './import-export/components/import-export-overview/import-export-overview.component';
+import { loggedInGuard } from './logged-in.guard';
 
 const routes: Routes = [
   {
@@ -35,30 +36,35 @@ const routes: Routes = [
     title: 'Tables',
     pathMatch: 'full',
     component: TablesOverviewComponent,
+    canActivate: [loggedInGuard]
   },
   {
     path: 'forms',
     title: 'Forms',
     pathMatch: 'full',
     component: FormsOverviewComponent,
+    canActivate: [loggedInGuard]
   },
   {
     path: 'charts',
     title: 'Charts',
     pathMatch: 'full',
     component: ChartsOverviewComponent,
+    canActivate: [loggedInGuard]
   },
   {
     path: 'import-export',
     title: 'Import/Export',
     pathMatch: 'full',
     component: ImportExportOverviewComponent,
+    canActivate: [loggedInGuard]
   },
   {
     path: 'users',
     title: 'Users',
     pathMatch: 'full',
     component: UsersOverviewComponent,
+    canActivate: [loggedInGuard]
   },
 ];
 
