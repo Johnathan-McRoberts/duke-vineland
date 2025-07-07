@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 interface WeatherForecast {
   date: string;
   temperatureC: number;
@@ -11,12 +11,14 @@ interface WeatherForecast {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  active = 0;
+  private router = inject(Router);
   public forecasts: WeatherForecast[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getForecasts();

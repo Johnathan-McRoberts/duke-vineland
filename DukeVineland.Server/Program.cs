@@ -1,4 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
+using DukeVineland.Repositories.Extensions;
+using DukeVineland.Server.Extensions;
+using DukeVineland.Services.Extensions;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -7,7 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+builder.Services.AddMongoDatabaseConfig(builder.Configuration);
+builder.Services.AddRepositories();
+builder.Services.AddServices();
+
+WebApplication app = builder.Build();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
