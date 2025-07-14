@@ -2,15 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 
 import {
   MatSnackBar,
-  MatSnackBarAction,
-  MatSnackBarActions,
-  MatSnackBarLabel,
-  MatSnackBarRef,
 } from '@angular/material/snack-bar';
+
 import { UserLoginResponseCode } from '../../../shared/models/user-login-response-code';
 
 import { LoggedInService } from '../../../shared/services/logged-in.service';
-//import { LoggedInService } from './logged-in.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +19,7 @@ export class LoginComponent {
   private _snackBar = inject(MatSnackBar);
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+    this._snackBar.open(message, action, { duration: 3000 });
   }
 
   protected readonly userNameValue = signal<string>('');

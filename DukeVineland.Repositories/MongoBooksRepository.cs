@@ -1,5 +1,6 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
+
+using DukeVineland.Domain.Books;
 
 using DukeVineland.Dtos.Configuration;
 
@@ -11,29 +12,25 @@ namespace DukeVineland.Repositories
 
         MongoClient _client;
         IMongoDatabase _database;
-        IMongoCollection<BsonDocument> _collection;
+        IMongoCollection<BookRead> _collection;
 
         public MongoBooksRepository(MongoDatabaseConfig config)
         {
             // Initialize the repository with the provided connection strings
-
             _client = new MongoClient(config.DatabaseConnectionString);
             _database = _client.GetDatabase("books_read");
-            _collection = _database.GetCollection<BsonDocument>("books");
-
-            //var list = await collection.Find(x => x.nationality == "Italy")
-            //    .ToListAsync();
+            _collection = _database.GetCollection<BookRead>("books");
         }
-
-        public async Task<List<BsonDocument>> GetBooksAsync()
+        public async Task<List<BookRead>> GetAllBooksRead()
         {
+            // This is a query to get everything. 
+            FilterDefinition<BookRead> filter =
+                Builders<BookRead>.Filter.Empty;
 
-            //var list = await _collection.Find(x => x.nationality == "Italy")
-            //    .ToListAsync();
+            // Retrieve all books from the collection based on the filter
+            List<BookRead> books = await _collection.Find(filter).ToListAsync();
 
-            // Retrieve all books from the collection
-            return await _collection.Find(new BsonDocument()).ToListAsync();
+            return books;
         }
-
     }
 }
