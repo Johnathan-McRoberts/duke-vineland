@@ -17,10 +17,6 @@ namespace DukeVineland.Server.Controllers
             _bookTablesService = bookTablesService;
         }
 
-        /// <summary>
-        /// Tries to log in a user.
-        /// </summary>
-        /// <returns>The action result.</returns>
         [HttpGet]
         [Route("tallied-books")]
         public async Task<List<TalliedBook>> GetTalliedBooks()
@@ -29,6 +25,16 @@ namespace DukeVineland.Server.Controllers
                 await _bookTablesService.GetTalliedBooks();
 
             return talliedBooks;
+        }
+
+        [HttpGet]
+        [Route("read-books")]
+        public async Task<List<ReadBook>> GetReadBooks()
+        {
+            List<ReadBook> readBooks =
+                await _bookTablesService.GetReadBooks();
+
+            return readBooks;
         }
     }
 }

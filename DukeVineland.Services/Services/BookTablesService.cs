@@ -97,5 +97,42 @@ namespace DukeVineland.Services.Services
                 totalAudioFormat++;
             }
         }
+
+        public async Task<List<ReadBook>> GetReadBooks()
+        {
+            // Get the sorted books
+            List<BookRead> allBooks =
+                (await _booksRepository.GetAllBooksRead())
+                    .OrderBy(b => b.Date)
+                    .ThenBy(b => b.Author)
+                    .ThenBy(b => b.Title)
+                    .ToList();
+
+            List<ReadBook> booksRead = new List<ReadBook>();
+
+            foreach (BookRead book in allBooks)
+            {
+                booksRead.Add(
+                    new ReadBook()
+                    {
+                        Date = book.Date,
+                        DateString = book.DateString,
+                        Author = book.Author,
+                        Title = book.Title,
+                        Pages = book.Pages,
+                        Format = book.Format.ToString(),
+                        ImageUrl = book.ImageUrl,
+                        Nationality = book.Nationality,
+                        OriginalLanguage = book.OriginalLanguage,
+                        Notes = book.Note,
+                        Tags = book.Tags.ToArray(),
+                        User = book.User,
+                        Id = book.Id.ToString()
+                    });
+            }
+
+            return booksRead;
+
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import {
   MatSnackBar,
@@ -12,7 +12,7 @@ import { BookTablesService } from '../../services/book-tables-service.service';
   templateUrl: './book-tallies.component.html',
   styleUrls: ['./book-tallies.component.css']
 })
-export class BookTalliesComponent {
+export class BookTalliesComponent implements OnInit {
 
   private _bookTablesService = inject(BookTablesService);
 
@@ -33,9 +33,7 @@ export class BookTalliesComponent {
   ];
 
   public get loading(): boolean { return this._tallies === undefined; }
-
   public get hasData(): boolean { return !this.loading; }
-
   public get dataSource(): any { return !this.loading ? this._tallies : []; }
   public get displayedColumns(): string[] { return this.columns; }
 
