@@ -7,6 +7,7 @@ export interface IReadBook {
   ImageUrl: string;
   Nationality: string;
   OriginalLanguage: string;
+  Format: string;
   Notes: string;
   Tags: string[];
   User: string;

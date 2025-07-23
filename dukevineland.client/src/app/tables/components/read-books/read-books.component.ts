@@ -35,17 +35,20 @@ export class ReadBooksComponent implements AfterViewInit {
 
   private _books: IReadBook[] | undefined = undefined;
 
+  public expandedElement: IReadBook | null = null;
+
   private readonly columns: string[] = [
     'date',
     'author',
     'title',
     'pages',
   ];
+  public columnsToDisplayWithExpand = [...this.columns, 'expand'];
 
   public get loading(): boolean { return this._books === undefined; }
   public get hasData(): boolean { return !this.loading; }
-  //public get dataSource(): any { return !this.loading ? this._books : []; }
-  public get displayedColumns(): string[] { return this.columns; }
+
+  public get displayedColumns(): string[] { return this.columnsToDisplayWithExpand; }
 
   ngAfterViewInit() {
     this.getBooks();
@@ -85,5 +88,17 @@ export class ReadBooksComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+  /** Checks whether an element is expanded. */
+  isExpanded(element: IReadBook) {
+    return this.expandedElement === element;
+  }
+
+  /** Toggles the expanded state of an element. */
+  toggle(element: IReadBook) {
+    console.log('toggle:', JSON.stringify(element));
+    this.expandedElement = this.isExpanded(element) ? null : element;
   }
 }

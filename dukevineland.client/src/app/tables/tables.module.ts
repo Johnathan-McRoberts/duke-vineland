@@ -5,7 +5,10 @@ import { TablesOverviewComponent } from './components/tables-overview/tables-ove
 import { BookTalliesComponent } from './components/book-tallies/book-tallies.component';
 import { ReadBooksComponent } from './components/read-books/read-books.component';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -22,7 +25,10 @@ import { MatTabsModule } from '@angular/material/tabs';
   imports: [
     CommonModule,
 
+    MatButtonModule,
+    MatChipsModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
