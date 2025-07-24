@@ -36,5 +36,15 @@ namespace DukeVineland.Server.Controllers
 
             return readBooks;
         }
+
+        [HttpGet]
+        [Route("book-authors")]
+        public async Task<List<BookAuthor>> GetBookAuthors()
+        {
+            List<BookAuthor> bookAuthors =
+                await _bookTablesService.GetBookAuthors();
+
+            return bookAuthors;
+        }
     }
 }

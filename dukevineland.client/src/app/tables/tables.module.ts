@@ -15,12 +15,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 @NgModule({
   declarations: [
     TablesOverviewComponent,
     BookTalliesComponent,
-    ReadBooksComponent
+    ReadBooksComponent,
+    AuthorsComponent
   ],
   imports: [
     CommonModule,

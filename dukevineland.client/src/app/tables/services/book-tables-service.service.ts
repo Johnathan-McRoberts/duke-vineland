@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IBookAuthor } from '../../shared/models/books/ibook-author';
 import { IReadBook } from '../../shared/models/books/iread-book';
 
 import { ITalliedBook } from '../../shared/models/books/itallied-book';
@@ -30,5 +31,14 @@ export class BookTablesService {
 
     // return the observable
     return this.http.get<IReadBook[]>(url);
+  }
+
+  getAuthors(): Observable<IBookAuthor[]> {
+
+    //set up the url
+    const url: string = '/api/BookTables/book-authors';
+
+    // return the observable
+    return this.http.get<IBookAuthor[]>(url);
   }
 }

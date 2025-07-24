@@ -112,27 +112,71 @@ namespace DukeVineland.Services.Services
 
             foreach (BookRead book in allBooks)
             {
-                booksRead.Add(
-                    new ReadBook()
-                    {
-                        Date = book.Date,
-                        DateString = book.DateString,
-                        Author = book.Author,
-                        Title = book.Title,
-                        Pages = book.Pages,
-                        Format = book.Format.ToString(),
-                        ImageUrl = book.ImageUrl,
-                        Nationality = book.Nationality,
-                        OriginalLanguage = book.OriginalLanguage,
-                        Notes = book.Note,
-                        Tags = book.Tags.ToArray(),
-                        User = book.User,
-                        Id = book.Id.ToString()
-                    });
+                booksRead.Add(GetReadBook(book));
             }
 
             return booksRead;
 
+        }
+
+        private static ReadBook GetReadBook(BookRead book)
+        {
+            return new ReadBook()
+            {
+                Date = book.Date,
+                DateString = book.DateString,
+                Author = book.Author,
+                Title = book.Title,
+                Pages = book.Pages,
+                Format = book.Format.ToString(),
+                ImageUrl = book.ImageUrl,
+                Nationality = book.Nationality,
+                OriginalLanguage = book.OriginalLanguage,
+                Notes = book.Note,
+                Tags = book.Tags.ToArray(),
+                User = book.User,
+                Id = book.Id.ToString()
+            };
+        }
+
+        public async Task<List<BookAuthor>> GetBookAuthors()
+        {
+            // Get the books
+            List<BookRead> allBooks =
+                await _booksRepository.GetAllBooksRead();
+
+            Dictionary<string, BookAuthor> authorsByName = new Dictionary<string, BookAuthor>();
+
+            foreach (BookRead book in allBooks)
+            {
+                if (authorsByName.TryGetValue(book.Author, out BookAuthor? author))
+                {
+                    AddBookToAuthor(book, author);
+                }
+                else
+                {
+                    BookAuthor newAuthor = new BookAuthor()
+                    {
+                        Name = book.Author,
+                        Nationality = book.Nationality,
+                        Language = book.OriginalLanguage
+                    };
+                    AddBookToAuthor(book, newAuthor);
+                    authorsByName.Add(book.Author, newAuthor);
+                }
+            }
+
+            return authorsByName.Values.OrderBy(author => author.Name).ToList();
+        }
+
+        private static void AddBookToAuthor(BookRead book, BookAuthor author)
+        {
+            author.TotalBooksReadBy++;
+            author.TotalPages += book.Pages;
+
+            List<ReadBook> books = author.Books.ToList();
+            books.Add(GetReadBook(book));
+            author.Books = books.ToArray();
         }
     }
 }

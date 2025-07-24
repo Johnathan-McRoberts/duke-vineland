@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   MatSnackBar,
@@ -17,6 +18,7 @@ export class LoginComponent {
 
   private _loggedInService = inject(LoggedInService);
   private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, { duration: 3000 });
@@ -52,13 +54,15 @@ export class LoginComponent {
 
             if (resp.errorCode === UserLoginResponseCode.Success) {
               this.openSnackBar('Login successful!', 'OK');
+
+              this._loggedInService.setLoggedInUser(resp);
+
+              this.router.navigateByUrl('tables');
             }
             else {
 
               this.openSnackBar('Login failed: ' + resp.failReason, 'OK');
             }
-
-            this._loggedInService.setLoggedInUser(resp);
           }
         });
   }
