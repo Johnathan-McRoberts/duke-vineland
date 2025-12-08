@@ -61,7 +61,6 @@ export class BookTalliesComponent implements OnInit {
             // an error occured
             this.openSnackBar('Get Book tallies failed: ', 'OK');
           }
-
         });
   }
 

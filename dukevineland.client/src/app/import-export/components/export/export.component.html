@@ -1,0 +1,57 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<div *ngIf="hasData">
+
+
+  <div class="flex-container">
+    <div>
+
+      <mat-form-field>
+        <mat-label>Document type</mat-label>
+
+        <mat-select [(ngModel)]="selectedDocumentType" name="documentType">
+
+          <mat-option *ngFor="let item of documentTypes" [value]="item.name">
+            {{item.name}}
+          </mat-option>
+
+
+        </mat-select>
+
+
+      </mat-form-field>
+
+
+      <p> Selected document type: {{selectedDocumentType}} </p>
+      <p> Description: {{selectedDocumentTypeDescription}} </p>
+
+    </div>
+
+    <div>
+
+      <mat-form-field>
+        <mat-label>Export Option</mat-label>
+
+        <mat-select [(ngModel)]="selectedExportOption" name="exportOption">
+
+          <mat-option *ngFor="let item of exportOptions" [value]="item.name">
+            {{item.name}}
+          </mat-option>
+
+
+        </mat-select>
+
+
+      </mat-form-field>
+
+
+      <p> Selected option: {{selectedExportOption}} </p>
+      <p> Description: {{selectedExportOptionDescription}} </p>
+
+    </div>
+
+  </div>
+
+
+
+</div>
