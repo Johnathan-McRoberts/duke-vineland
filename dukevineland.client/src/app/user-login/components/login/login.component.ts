@@ -1,16 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   MatSnackBar,
-  MatSnackBarAction,
-  MatSnackBarActions,
-  MatSnackBarLabel,
-  MatSnackBarRef,
 } from '@angular/material/snack-bar';
+
 import { UserLoginResponseCode } from '../../../shared/models/user-login-response-code';
 
 import { LoggedInService } from '../../../shared/services/logged-in.service';
-//import { LoggedInService } from './logged-in.service';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +18,10 @@ export class LoginComponent {
 
   private _loggedInService = inject(LoggedInService);
   private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+    this._snackBar.open(message, action, { duration: 3000 });
   }
 
   protected readonly userNameValue = signal<string>('');
@@ -56,13 +54,15 @@ export class LoginComponent {
 
             if (resp.errorCode === UserLoginResponseCode.Success) {
               this.openSnackBar('Login successful!', 'OK');
+
+              this._loggedInService.setLoggedInUser(resp);
+
+              this.router.navigateByUrl('tables');
             }
             else {
 
               this.openSnackBar('Login failed: ' + resp.failReason, 'OK');
             }
-
-            this._loggedInService.setLoggedInUser(resp);
           }
         });
   }
