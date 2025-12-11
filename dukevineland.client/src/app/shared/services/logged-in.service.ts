@@ -22,6 +22,10 @@ export class LoggedInService {
     return (this.currentUser !== null) ? this.currentUser.name : '';
   }
 
+  public get loggedInUserId(): string {
+    return (this.currentUser !== null) ? this.currentUser.userId : '';
+  }
+
   public setLoggedInUser(user: UserLoginResponse): void {
     this.currentUser = user;
   }

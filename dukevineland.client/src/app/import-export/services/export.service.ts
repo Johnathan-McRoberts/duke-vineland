@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { ExportOptionsResponseDto } from '../models/export-options-response-dto';
 
@@ -13,7 +13,7 @@ export class ExportService {
 
   constructor() { }
 
-  getExportOptions(): Observable<ExportOptionsResponseDto> {
+  public getExportOptions(): Observable<ExportOptionsResponseDto> {
 
     //set up the url
     const url: string = '/api/Export/options';
@@ -21,5 +21,47 @@ export class ExportService {
     // return the observable
     return this.http.get<ExportOptionsResponseDto>(url);
   }
+
+  public getExport(
+    user: string,
+    documentType: string,
+    exportOption: string
+  ) {
+    const url: string = `/api/Export/export`;
+
+    return this.http
+      .post<Blob>(
+        url,
+        {
+          UserId: user,
+          DocumentType: documentType,
+          Options: [exportOption],
+        },
+        { observe: 'response', responseType: 'blob' as 'json' },
+      )
+      .pipe(
+        map((response: HttpResponse<Blob>) => {
+          const filename: string =
+            this.getFileName(response.headers.get('Content-Disposition')) ??
+            `report.${documentType.toLowerCase()}`;
+          return { filename, response };
+        }),
+      );
+  }
+
+  public getFileName(contentDisposition: string | null): string | null {
+    if (!contentDisposition) {
+      return null;
+    }
+
+    const fileName = contentDisposition
+      .split(';')
+      .find((n: string) => n.includes("filename*=UTF-8''"))
+      ?.replace(/filename\*=UTF-8''|"/g, '')
+      .trim();
+
+    return fileName ? decodeURIComponent(fileName) : null;
+  }
+
 
 }

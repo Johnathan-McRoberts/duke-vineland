@@ -31,7 +31,7 @@ namespace DukeVineland.Server.Controllers
             return options;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("export")]
         public async Task<IActionResult> GetExport([FromBody] ExportRequestDto request)
         {

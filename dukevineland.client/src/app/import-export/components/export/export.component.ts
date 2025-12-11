@@ -3,8 +3,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
+import { LoggedInService } from '../../../shared/services/logged-in.service';
 
 import { ExportOptionsResponseDto, IDocumentType, IExportOption } from '../../models/export-options-response-dto';
+import { DownloadService } from '../../services/download.service';
 
 import { ExportService } from '../../services/export.service';
 
@@ -16,6 +18,8 @@ import { ExportService } from '../../services/export.service';
 export class ExportComponent implements OnInit {
 
   private _exportService = inject(ExportService);
+  private _loggedInService = inject(LoggedInService);
+  private _downloadService = inject(DownloadService);
 
   private _snackBar = inject(MatSnackBar);
 
@@ -193,4 +197,23 @@ export class ExportComponent implements OnInit {
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
   }
+
+  exportData() {
+    if (this._selectedDocumentType && this._selectedExportOptionName) {
+
+      console.log("Getting report of type: " + this._selectedDocumentType +
+        " with export option: " + this._selectedExportOptionName +
+        " for user: " + this._loggedInService.loggedInUserName);
+
+      this._downloadService.downloadDocument(
+        this._loggedInService.loggedInUserName,
+        this._selectedDocumentType,
+        this._selectedExportOptionName
+      );
+    }
+  }
+
+
+
+
 }

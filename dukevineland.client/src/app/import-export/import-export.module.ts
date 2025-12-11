@@ -4,6 +4,7 @@ import { ImportExportOverviewComponent } from './components/import-export-overvi
 import { ExportComponent } from './components/export/export.component';
 import { ImportComponent } from './components/import/import.component';
 
+import { LoggedInService } from './../shared/services/logged-in.service';
 
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTableModule,
     MatTabsModule
   ],
+  providers: [LoggedInService],
   exports: [ImportExportOverviewComponent]
 })
 export class ImportExportModule { }
