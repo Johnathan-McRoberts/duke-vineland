@@ -20,6 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { LoggedInService } from './shared/services/logged-in.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     NgbNavModule
   ],
-  providers: [],
+  providers: [
+    LoggedInService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,87 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<div *ngIf="hasData">
+  <table>
+    <tr>
+      <td>
+
+        <table>
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Document type</mat-label>
+
+                <mat-select [(ngModel)]="selectedDocumentType" name="documentType">
+
+                  <mat-option *ngFor="let item of documentTypes" [value]="item.name">
+                    {{item.name}}
+                  </mat-option>
+
+                </mat-select>
+
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Selected document type: <b>{{selectedDocumentType}}</b>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{selectedDocumentTypeDescription}}
+
+            </td>
+          </tr>
+        </table>
+
+      </td>
+      <td>
+
+        <table>
+          <tr>
+            <td>
+
+              <mat-form-field>
+                <mat-label>Export Option</mat-label>
+
+                <mat-select [(ngModel)]="selectedExportOption" name="exportOption">
+
+                  <mat-option *ngFor="let item of exportOptions" [value]="item.name">
+                    {{item.name}}
+                  </mat-option>
+
+
+                </mat-select>
+
+
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Selected option: <b> {{selectedExportOption}}</b>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{selectedExportOptionDescription}}
+
+            </td>
+          </tr>
+        </table>
+
+      </td>
+      <td>
+
+        <button mat-raised-button type="submit" color="primary" (click)="exportData()">
+          Export
+        </button>
+
+      </td>
+    </tr>
+  </table>
+
+</div>
