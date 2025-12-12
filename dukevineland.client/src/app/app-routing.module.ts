@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { ChartsModule } from './charts/charts.module';
-import { FormsModule } from './forms/forms.module';
+import { DataFormsModule } from './forms/forms.module';
 import { ImportExportModule } from './import-export/import-export.module';
 import { TablesModule } from './tables/tables.module';
 import { UserLoginModule } from './user-login/user-login.module';
@@ -76,7 +76,7 @@ const routes: Routes = [
     CommonModule,
 
     ChartsModule,
-    FormsModule,
+    DataFormsModule,
     ImportExportModule,
     TablesModule,
     UserLoginModule,

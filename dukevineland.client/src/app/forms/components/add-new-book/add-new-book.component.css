@@ -1,0 +1,16 @@
+.button {
+  padding: 10px;
+  margin: 5px;
+}
+
+.button-box {
+  /*border: 2px dotted rgb(96 139 168);*/
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}

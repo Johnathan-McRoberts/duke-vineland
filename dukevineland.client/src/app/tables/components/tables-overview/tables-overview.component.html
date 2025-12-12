@@ -1,13 +1,21 @@
 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
 
   <mat-tab label="Tallies">
-    <app-book-tallies></app-book-tallies>
+    <ng-template matTabContent>
+      <app-book-tallies></app-book-tallies>
+    </ng-template>
   </mat-tab>
+
   <mat-tab label="Books Read">
-    <app-read-books></app-read-books>
+    <ng-template matTabContent>
+      <app-read-books></app-read-books>
+    </ng-template>
   </mat-tab>
+
   <mat-tab label="Authors">
-    <app-authors></app-authors>
+    <ng-template matTabContent>
+      <app-authors></app-authors>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>
 
