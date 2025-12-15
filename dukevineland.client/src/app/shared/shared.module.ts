@@ -19,8 +19,8 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    MainToolbarComponent,
-    //ToastContainerComponent
+    //MainToolbarComponent,
+    ////ToastContainerComponent
   ],
   imports: [
     CommonModule,

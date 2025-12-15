@@ -24,9 +24,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
-    ImportExportOverviewComponent,
-    ExportComponent,
-    ImportComponent
+    //ImportExportOverviewComponent,
+    //ExportComponent,
+    //ImportComponent
   ],
   imports: [
     CommonModule,

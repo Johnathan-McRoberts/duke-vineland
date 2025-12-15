@@ -19,10 +19,10 @@ import { AuthorsComponent } from './components/authors/authors.component';
 
 @NgModule({
   declarations: [
-    TablesOverviewComponent,
-    BookTalliesComponent,
-    ReadBooksComponent,
-    AuthorsComponent
+    //TablesOverviewComponent,
+    //BookTalliesComponent,
+    //ReadBooksComponent,
+    //AuthorsComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +38,8 @@ import { AuthorsComponent } from './components/authors/authors.component';
     MatTableModule,
     MatTabsModule
   ],
-  exports: [TablesOverviewComponent]
+  exports: [
+  //  TablesOverviewComponent
+  ]
 })
 export class TablesModule { }

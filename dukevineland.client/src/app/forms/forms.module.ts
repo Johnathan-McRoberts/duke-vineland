@@ -25,13 +25,13 @@ import { NotesAndTagsFormComponent } from './components/notes-and-tags-form/note
 
 @NgModule({
   declarations: [
-    FormsOverviewComponent,
-    AddNewBookComponent,
-    EditExistingBookComponent,
-    FindBookDetailsComponent,
-    BasicFieldsFormComponent,
-    CoverImageFormComponent,
-    NotesAndTagsFormComponent
+    //FormsOverviewComponent,
+    //AddNewBookComponent,
+    //EditExistingBookComponent,
+    //FindBookDetailsComponent,
+    //BasicFieldsFormComponent,
+    //CoverImageFormComponent,
+    //NotesAndTagsFormComponent
   ],
   imports: [
     CommonModule,

@@ -21,9 +21,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
-    UsersOverviewComponent,
-    LoginComponent,
-    AddUserComponent
+    //UsersOverviewComponent,
+    //LoginComponent,
+    //AddUserComponent
   ],
   imports: [
     RouterModule,
@@ -44,7 +44,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     CommonModule
   ],
   exports: [
-    LoginComponent,
-    UsersOverviewComponent]
+    //LoginComponent,
+    //UsersOverviewComponent
+  ]
 })
 export class UserLoginModule { }

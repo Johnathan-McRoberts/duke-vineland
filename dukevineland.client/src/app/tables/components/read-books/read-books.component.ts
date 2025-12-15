@@ -1,4 +1,9 @@
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+
+
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IReadBook } from '../../../shared/models/books/iread-book';
 import { BookTablesService } from '../../services/book-tables-service.service';
@@ -11,7 +16,13 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-read-books',
   templateUrl: './read-books.component.html',
-  styleUrls: ['./read-books.component.css']
+  styleUrls: ['./read-books.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule, // If you use *ngIf, *ngFor
+    MatTableModule, // Import the whole Table Module
+    // Or just the directive if available/preferred: MatHeaderCellDef,
+  ],
 })
 export class ReadBooksComponent implements AfterViewInit {
 

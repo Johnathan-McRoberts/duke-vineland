@@ -1,6 +1,11 @@
-<mat-spinner *ngIf="loading"></mat-spinner>
+@if(loading)
+{
+<mat-spinner></mat-spinner>
+}
 
-<div *ngIf="hasData">
+@if(hasData)
+{
+<div>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -66,3 +71,4 @@
 
 
 </div>
+}

@@ -1,6 +1,12 @@
-<mat-spinner *ngIf="loading"></mat-spinner>
+@if(loading)
+{
+<mat-spinner></mat-spinner>
+}
 
-<div *ngIf="hasData">
+
+@if(hasData)
+{
+<div>
   <table>
     <tr>
       <td>
@@ -13,9 +19,12 @@
 
                 <mat-select [(ngModel)]="selectedDocumentType" name="documentType">
 
-                  <mat-option *ngFor="let item of documentTypes" [value]="item.name">
+
+                  @for (item of documentTypes; track item) {
+                  <mat-option [value]="item.name">
                     {{item.name}}
                   </mat-option>
+                  }
 
                 </mat-select>
 
@@ -48,9 +57,11 @@
 
                 <mat-select [(ngModel)]="selectedExportOption" name="exportOption">
 
-                  <mat-option *ngFor="let item of exportOptions" [value]="item.name">
+                  @for (item of exportOptions ; track item) {
+                  <mat-option [value]="item.name">
                     {{item.name}}
                   </mat-option>
+                  }
 
 
                 </mat-select>
@@ -85,3 +96,5 @@
   </table>
 
 </div>
+
+}

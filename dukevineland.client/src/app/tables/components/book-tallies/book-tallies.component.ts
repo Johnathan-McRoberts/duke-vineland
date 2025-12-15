@@ -1,5 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 
+
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+
 import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
@@ -10,7 +14,13 @@ import { BookTablesService } from '../../services/book-tables-service.service';
 @Component({
   selector: 'app-book-tallies',
   templateUrl: './book-tallies.component.html',
-  styleUrls: ['./book-tallies.component.css']
+  styleUrls: ['./book-tallies.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule, // If you use *ngIf, *ngFor
+    MatTableModule, // Import the whole Table Module
+    // Or just the directive if available/preferred: MatHeaderCellDef,
+  ],
 })
 export class BookTalliesComponent implements OnInit {
 

@@ -24,7 +24,7 @@ import { LoggedInService } from './shared/services/logged-in.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    //AppComponent
   ],
   imports: [
     BrowserModule,

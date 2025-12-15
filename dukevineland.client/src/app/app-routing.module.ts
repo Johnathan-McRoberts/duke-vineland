@@ -75,12 +75,12 @@ const routes: Routes = [
 
     CommonModule,
 
-    ChartsModule,
-    DataFormsModule,
-    ImportExportModule,
-    TablesModule,
-    UserLoginModule,
-    SharedModule,
+    //ChartsModule,
+    //DataFormsModule,
+    //ImportExportModule,
+    //TablesModule,
+    //UserLoginModule,
+    //SharedModule,
   ],
   exports: [RouterModule],
 })

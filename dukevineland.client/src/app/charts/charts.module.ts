@@ -12,6 +12,7 @@ import { ChartsOverviewComponent } from './components/charts-overview/charts-ove
     CommonModule
   ],
   exports: [
-    ChartsOverviewComponent]
+  //  ChartsOverviewComponent
+  ]
 })
 export class ChartsModule { }
