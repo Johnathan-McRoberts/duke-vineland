@@ -1,0 +1,140 @@
+<mat-stepper #stepper>
+  <mat-step [stepControl]="basicsFormGroup" errorMessage="Book Basics are required.">
+    <form [formGroup]="basicsFormGroup" class="add-book-form">
+      <ng-template matStepLabel>Fill out the basics for the book</ng-template>
+      <div class="form-input-container">
+        <mat-form-field>
+          <mat-label>Date</mat-label>
+          <input matInput placeholder="Date" formControlName="dateCtrl" required>
+        </mat-form-field>
+      </div>
+      <div class="form-input-container">
+        <mat-form-field>
+          <mat-label>Author</mat-label>
+          <input matInput placeholder="Author" formControlName="authorCtrl" required>
+        </mat-form-field>
+      </div>
+      <div class="form-input-container">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Title" formControlName="titleCtrl" required>
+        </mat-form-field>
+      </div>
+      <div class="form-input-container">
+        <mat-form-field>
+          <mat-label>Pages</mat-label>
+          <input matInput type="number" min="0" max="3000" formControlName="pagesCtrl" required>
+        </mat-form-field>
+      </div>
+      <div class="form-input-container">
+        <mat-form-field>
+          <mat-label>Nationality</mat-label>
+          <input matInput placeholder="Nationality" formControlName="nationalityCtrl" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-input-container">
+        <mat-form-field>
+          <mat-label>Original Language</mat-label>
+          <input matInput placeholder="Original Language" formControlName="originalLanguageCtrl" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-input-container">
+        <mat-form-field>
+          <mat-label>Format</mat-label>
+          <mat-select matInput placeholder="Format" formControlName="formatCtrl" required>
+            <mat-option value="book">Book</mat-option>
+            <mat-option value="comic">Comic</mat-option>
+            <mat-option value="audio">Audio book</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <p>Form Value: {{ basicsFormGroup.value | json }}</p>
+
+        <p>Form Status: {{ basicsFormGroup.status }}</p>
+
+        <p>Go to a different step to see the error state</p>
+        <button mat-raised-button color="primary" matStepperNext [disabled]="!basicsFormGroup.valid">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="imageFormGroup" errorMessage="Image Address is required." class="add-book-form">
+    <form [formGroup]="imageFormGroup">
+      <ng-template matStepLabel>Add an image</ng-template>
+      <mat-form-field>
+        <mat-label>Image URL</mat-label>
+        <input matInput placeholder="an http address" formControlName="imageUrlCtrl"
+               required>
+      </mat-form-field>
+      <div>
+        <p>Form Value: {{ imageFormGroup.value | json }}</p>
+
+        <p>Form Status: {{ imageFormGroup.status }}</p>
+
+        <p>Go to a different step to see the error state</p>
+
+        <div class="row">
+          <div class="col-sm-4">
+
+          </div>
+          <div class="d-grid gap-3 col-sm-4 gap-3 p-2 m-2" style="grid-template-columns: 1fr 1fr">
+
+            <div class="p-2">
+              <button mat-raised-button type="submit" color="primary" matStepperPrevious>Back</button>
+            </div>
+
+            <div class="p-2">
+              <button mat-raised-button type="submit" color="primary" matStepperNext [disabled]="!imageFormGroup.valid">Next</button>
+            </div>
+
+            <div class="col-sm-4"></div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="notesFormGroup" errorMessage="Notes are required.">
+    <form [formGroup]="notesFormGroup" class="add-book-form">
+      <ng-template matStepLabel>Add notes and tags</ng-template>
+      <mat-form-field>
+        <mat-label>Notes</mat-label>
+        <input matInput placeholder="Some notes" formControlName="notesCtrl"
+               required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tags</mat-label>
+        <input matInput placeholder="some tags" formControlName="tagsCtrl"
+               required>
+      </mat-form-field>
+      <p>Form Value: {{ notesFormGroup.value | json }}</p>
+
+      <p>Form Status: {{ notesFormGroup.status }}</p>
+
+      <p>You are now done.</p>
+
+      <div class="row">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="d-grid gap-3 col-sm-4 gap-3 p-2 m-2" style="grid-template-columns: 1fr 1fr">
+
+          <div class="p-2">
+            <button mat-raised-button type="submit" color="primary" matStepperPrevious>Back</button>
+          </div>
+
+          <div class="p-2">
+            <button mat-raised-button type="submit" color="primary" (click)="stepper.reset()">Reset</button>
+          </div>
+
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>
+
+<p>add-book-stepper works!</p>
+

@@ -16,22 +16,16 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { FormsOverviewComponent } from './components/forms-overview/forms-overview.component';
-import { AddNewBookComponent } from './components/add-new-book/add-new-book.component';
 import { EditExistingBookComponent } from './components/edit-existing-book/edit-existing-book.component';
 import { FindBookDetailsComponent } from './components/find-book-details/find-book-details.component';
-import { BasicFieldsFormComponent } from './components/basic-fields-form/basic-fields-form.component';
-import { CoverImageFormComponent } from './components/cover-image-form/cover-image-form.component';
-import { NotesAndTagsFormComponent } from './components/notes-and-tags-form/notes-and-tags-form.component';
+import { AddBookStepperComponent } from './components/add-book-stepper/add-book-stepper.component';
 
 @NgModule({
   declarations: [
     FormsOverviewComponent,
-    AddNewBookComponent,
+    AddBookStepperComponent,
     EditExistingBookComponent,
-    FindBookDetailsComponent,
-    BasicFieldsFormComponent,
-    CoverImageFormComponent,
-    NotesAndTagsFormComponent
+    FindBookDetailsComponent
   ],
   imports: [
     CommonModule,
