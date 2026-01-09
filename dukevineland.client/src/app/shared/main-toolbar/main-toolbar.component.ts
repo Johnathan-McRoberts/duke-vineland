@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoggedInService } from '../services/logged-in.service';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-main-toolbar',
   templateUrl: './main-toolbar.component.html',
   styleUrls: ['./main-toolbar.component.css']

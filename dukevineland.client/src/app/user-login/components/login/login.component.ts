@@ -10,6 +10,7 @@ import { UserLoginResponseCode } from '../../../shared/models/user-login-respons
 import { LoggedInService } from '../../../shared/services/logged-in.service';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

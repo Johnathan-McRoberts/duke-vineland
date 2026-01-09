@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-read-books',
   templateUrl: './read-books.component.html',
   styleUrls: ['./read-books.component.css']

@@ -8,6 +8,7 @@ import { ITalliedBook } from '../../../shared/models/books/itallied-book';
 import { BookTablesService } from '../../services/book-tables-service.service';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-book-tallies',
   templateUrl: './book-tallies.component.html',
   styleUrls: ['./book-tallies.component.css']

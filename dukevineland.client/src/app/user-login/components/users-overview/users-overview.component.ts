@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-users-overview',
   templateUrl: './users-overview.component.html',
   styleUrls: ['./users-overview.component.scss']

@@ -10,6 +10,7 @@ import { IBookAuthor } from '../../../shared/models/books/ibook-author';
 import { BookTablesService } from '../../services/book-tables-service.service';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-authors',
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.css']

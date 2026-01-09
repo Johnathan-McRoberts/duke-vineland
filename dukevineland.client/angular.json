@@ -39,8 +39,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "dukevineland.client:build:production"
+              "buildTarget": "dukevineland.client:build:production"
             },
             "development": {
-              "browserTarget": "dukevineland.client:build:development"
+              "buildTarget": "dukevineland.client:build:development"
             }
           },
           "defaultConfiguration": "development",

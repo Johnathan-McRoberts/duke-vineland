@@ -15,6 +15,7 @@ import { NewBookBasics } from '../../models/new-book-basics';
 import { NewBook } from '../../models/new-book';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-add-book-stepper',
   templateUrl: './add-book-stepper.component.html',
   styleUrls: ['./add-book-stepper.component.css'],

@@ -11,6 +11,7 @@ import { DownloadService } from '../../services/download.service';
 import { ExportService } from '../../services/export.service';
 
 @Component({
+  standalone: false,  // this is now required when using NgModule
   selector: 'app-export',
   templateUrl: './export.component.html',
   styleUrls: ['./export.component.css']
