@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -34,6 +36,9 @@ import { AddBookStepperComponent } from './components/add-book-stepper/add-book-
     FormsModule,
     ReactiveFormsModule,
 
+    AsyncPipe,
+
+    MatAutocompleteModule,
     MatButtonModule,
     MatChipsModule,
     MatDatepickerModule,

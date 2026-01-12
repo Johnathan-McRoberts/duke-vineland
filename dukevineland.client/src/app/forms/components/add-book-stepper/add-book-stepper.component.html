@@ -1,4 +1,7 @@
-<mat-stepper #stepper>
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<mat-stepper #stepper *ngIf="hasData">
+
   <mat-step [stepControl]="basicsFormGroup" errorMessage="Book Basics are required.">
     <form [formGroup]="basicsFormGroup" class="add-book-form">
       <ng-template matStepLabel>Fill out the basics for the book</ng-template>
@@ -11,39 +14,71 @@
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-          
+
         </mat-form-field>
+
       </div>
 
       <div class="form-input-container">
         <mat-form-field>
           <mat-label>Author</mat-label>
-          <input matInput placeholder="Author" formControlName="authorCtrl" required>
+
+          <input type="text"
+                 placeholder="Author"
+                 aria-label="Author"
+                 matInput
+                 [formControl]="bookAuthorCtrl"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            @for (author of filteredAuthorOptions | async; track author) {
+            <mat-option [value]="author">{{author}}</mat-option>
+            }
+          </mat-autocomplete>
         </mat-form-field>
       </div>
+
       <div class="form-input-container">
         <mat-form-field>
           <mat-label>Title</mat-label>
           <input matInput placeholder="Title" formControlName="titleCtrl" required>
         </mat-form-field>
       </div>
+
       <div class="form-input-container">
         <mat-form-field>
           <mat-label>Pages</mat-label>
           <input matInput type="number" min="0" max="3000" formControlName="pagesCtrl" required>
         </mat-form-field>
       </div>
-      <div class="form-input-container">
+
+      <div class="form-input-container" *ngIf="filteredNationOptions | async">
         <mat-form-field>
           <mat-label>Nationality</mat-label>
-          <input matInput placeholder="Nationality" formControlName="nationalityCtrl" required>
+
+          <mat-select matInput placeholder="Chosen Country" formControlName="nationalityCtrl" required>
+
+            @for (country of optionForNations ; track country) {
+            <mat-option [value]="country">{{country}}</mat-option>
+            }
+          </mat-select>
         </mat-form-field>
       </div>
 
       <div class="form-input-container">
         <mat-form-field>
           <mat-label>Original Language</mat-label>
-          <input matInput placeholder="Original Language" formControlName="originalLanguageCtrl" required>
+
+          <input type="text"
+                 placeholder="Language"
+                 aria-label="Language"
+                 matInput
+                 [formControl]="bookLanguageCtrl"
+                 [matAutocomplete]="autoLanguage">
+          <mat-autocomplete autoActiveFirstOption #autoLanguage="matAutocomplete">
+            @for (language of filteredLanguageOptions | async; track language) {
+            <mat-option [value]="language">{{language}}</mat-option>
+            }
+          </mat-autocomplete>
         </mat-form-field>
       </div>
 
@@ -57,6 +92,7 @@
           </mat-select>
         </mat-form-field>
       </div>
+
       <div>
         <p>Form Value: {{ basicsFormGroup.value | json }}</p>
 
@@ -67,14 +103,27 @@
       </div>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="imageFormGroup" errorMessage="Image Address is required." class="add-book-form">
+
     <form [formGroup]="imageFormGroup">
       <ng-template matStepLabel>Add an image</ng-template>
-      <mat-form-field>
-        <mat-label>Image URL</mat-label>
-        <input matInput placeholder="an http address" formControlName="imageUrlCtrl"
-               required>
-      </mat-form-field>
+
+      <div class="form-input-container">
+
+        <mat-form-field>
+          <mat-label>Image URL</mat-label>
+          <input matInput placeholder="an http address" formControlName="imageUrlCtrl"
+                 required>
+        </mat-form-field>
+
+      </div>
+
+
+      <div *ngIf="imageUrl">
+        <img src="{{imageUrl}}" height="250" />
+      </div>
+
       <div>
         <p>Form Value: {{ imageFormGroup.value | json }}</p>
 
@@ -102,19 +151,22 @@
 
       </div>
     </form>
+
   </mat-step>
+
   <mat-step [stepControl]="notesFormGroup" errorMessage="Notes are required.">
     <form [formGroup]="notesFormGroup" class="add-book-form">
       <ng-template matStepLabel>Add notes and tags</ng-template>
       <mat-form-field>
         <mat-label>Notes</mat-label>
-        <input matInput placeholder="Some notes" formControlName="notesCtrl"
-               required>
+        <textarea matInput placeholder="Some notes" formControlName="notesCtrl"
+                  rows="5"
+                  required>
+        </textarea>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Tags</mat-label>
-        <input matInput placeholder="some tags" formControlName="tagsCtrl"
-               required>
+        <input matInput placeholder="some tags" formControlName="tagsCtrl">
       </mat-form-field>
       <p>Form Value: {{ notesFormGroup.value | json }}</p>
 
@@ -141,7 +193,6 @@
       </div>
     </form>
   </mat-step>
-</mat-stepper>
 
-<p>add-book-stepper works!</p>
+</mat-stepper>
 
