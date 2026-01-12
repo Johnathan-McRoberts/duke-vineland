@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 import {
   FormControl,
@@ -10,6 +11,9 @@ import {
 
 } from '@angular/forms';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { NewBookBasics } from '../../models/new-book-basics';
 import { NewBook } from '../../models/new-book';
@@ -20,6 +24,7 @@ import { NewBook } from '../../models/new-book';
   templateUrl: './add-book-stepper.component.html',
   styleUrls: ['./add-book-stepper.component.css'],
   providers: [
+    provideNativeDateAdapter(),
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true },
@@ -50,5 +55,9 @@ export class AddBookStepperComponent {
   });
 
   public basics: NewBookBasics = new NewBookBasics();
+
+
+  public currentDate = new Date();
+
 
 }

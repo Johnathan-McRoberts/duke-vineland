@@ -2,12 +2,19 @@
   <mat-step [stepControl]="basicsFormGroup" errorMessage="Book Basics are required.">
     <form [formGroup]="basicsFormGroup" class="add-book-form">
       <ng-template matStepLabel>Fill out the basics for the book</ng-template>
+
       <div class="form-input-container">
+
         <mat-form-field>
-          <mat-label>Date</mat-label>
-          <input matInput placeholder="Date" formControlName="dateCtrl" required>
+          <mat-label>Choose a date</mat-label>
+          <input matInput formControlName="dateCtrl" type="text" [max]="currentDate" [matDatepicker]="picker">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          
         </mat-form-field>
       </div>
+
       <div class="form-input-container">
         <mat-form-field>
           <mat-label>Author</mat-label>
