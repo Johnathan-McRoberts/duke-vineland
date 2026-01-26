@@ -99,7 +99,10 @@
         <p>Form Status: {{ basicsFormGroup.status }}</p>
 
         <p>Go to a different step to see the error state</p>
-        <button mat-raised-button color="primary" matStepperNext [disabled]="!basicsFormGroup.valid">Next</button>
+        <button mat-raised-button color="primary"
+                matStepperNext [disabled]="!basicsFormGroup.valid">
+          Next
+        </button>
       </div>
     </form>
   </mat-step>
@@ -118,7 +121,6 @@
         </mat-form-field>
 
       </div>
-
 
       <div *ngIf="imageUrl">
         <img src="{{imageUrl}}" height="250" />
@@ -164,34 +166,127 @@
                   required>
         </textarea>
       </mat-form-field>
+
       <mat-form-field>
+
         <mat-label>Tags</mat-label>
-        <input matInput placeholder="some tags" formControlName="tagsCtrl">
+        <mat-chip-grid #chipGrid aria-label="Tag selection">
+          @for (tag of tags(); track $index) {
+          <mat-chip-row (removed)="removeTag(tag)">
+            {{tag}}
+            <button matChipRemove [attr.aria-label]="'remove ' + tag">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+        </mat-chip-grid>
+        <input name="currentTag"
+               placeholder="New Tag..."
+               #tagInput
+               [(ngModel)]="currentTag"
+               [matChipInputFor]="chipGrid"
+               [matAutocomplete]="autoTags"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="addTag($event)"
+               formControlName="tagsCtrl" />
+        <mat-autocomplete #autoTags="matAutocomplete" (optionSelected)="selectedTag($event); tagInput.value = ''">
+          @for (tag of filteredTags(); track tag) {
+          <mat-option [value]="tag">{{tag}}</mat-option>
+          }
+        </mat-autocomplete>
+
+
       </mat-form-field>
       <p>Form Value: {{ notesFormGroup.value | json }}</p>
 
       <p>Form Status: {{ notesFormGroup.status }}</p>
 
       <p>You are now done.</p>
+    </form>
+    <div>
+      <div class="container">
+        <div class="row">
 
-      <div class="row">
-        <div class="col-sm-4">
+          <div class="col">
 
+            <div class="p-2">
+            </div>
+
+          </div>
+
+          <div class="col-5">
+
+          </div>
+
+
+          <div class="col-5">
+
+            <div class="p-2">
+            </div>
+
+          </div>
+
+          <div class="col">
+
+
+          </div>
         </div>
-        <div class="d-grid gap-3 col-sm-4 gap-3 p-2 m-2" style="grid-template-columns: 1fr 1fr">
 
-          <div class="p-2">
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
             <button mat-raised-button type="submit" color="primary" matStepperPrevious>Back</button>
           </div>
-
-          <div class="p-2">
-            <button mat-raised-button type="submit" color="primary" (click)="stepper.reset()">Reset</button>
+          <div class="col">
+            <button mat-raised-button
+                    [disabled]="!basicsFormGroup.valid || !imageFormGroup.valid || !notesFormGroup.valid"
+                    (click)="onNewBookDisplay()">
+              Details
+            </button>
           </div>
-
+          <div class="col">
+            <button mat-raised-button type="submit"
+                    [disabled]="!basicsFormGroup.valid || !imageFormGroup.valid || !notesFormGroup.valid"
+                    color="primary" (click)="onAddNewBook()">
+              Add
+            </button>
+          </div>
+          <div class="col">
+            <div class="p-2">
+              <button mat-raised-button type="submit" color="primary" (click)="stepper.reset()">Reset</button>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-4"></div>
       </div>
-    </form>
+
+
+
+
+      <div class="add-book-detail-container" *ngIf="canShowDetail">
+
+        <div class="author"><h4>Author:</h4><h2>{{newBookItemAuthor()}}</h2></div>
+        <div class="title"><h4>Title:</h4><h2>{{newBookItemTitle()}}</h2></div>
+        <div class="pages"><h4>Pages:</h4><h2>{{newBookItemPages()}}</h2></div>
+        <div class="date"><h4>Date:</h4><h3>{{newBookItemDate()}}</h3></div>
+
+        <div class="image"><img src="{{newBookItemImageUrl()}}" class="aspectshrink" /></div>
+        <div class="notes"><h3>Notes</h3><p>{{newBookItemNotes()}}</p></div>
+
+        <div class="language"><h4>Language:</h4> {{newBookItemOriginalLanguage()}}</div>
+        <div class="nation"><h4>Nation:</h4> {{newBookItemNationality()}}</div>
+        <div class="format"><h4>Format:</h4> {{newBookItemFormat()}}</div>
+        <div class="tags">
+          <h4>Tags:</h4>
+          <mat-chip-set>
+            <mat-chip *ngFor="let tag of newBookItemTags()">{{tag}}</mat-chip>
+          </mat-chip-set>
+        </div>
+
+      </div>
+    </div>
   </mat-step>
 
 </mat-stepper>

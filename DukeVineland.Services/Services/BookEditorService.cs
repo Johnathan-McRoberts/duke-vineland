@@ -56,7 +56,13 @@ namespace DukeVineland.Services.Services
 
         private static string[] GetSortedDistinct(List<string> items)
         {
-            return items.Distinct().OrderBy(x => x).ToList().ToArray();
+            List<string> trimmed = new List<string>();
+            foreach (string item in items)
+            {
+                trimmed.Add(item.Trim());
+            }
+
+            return trimmed.Distinct().OrderBy(x => x).ToList().ToArray();
         }
     }
 }
