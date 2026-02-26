@@ -21,16 +21,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { NewBookBasics } from '../../models/new-book-basics';
-import { NewBook } from '../../models/new-book';
-import { BookEditorService } from '../../services/book-editor-service';
 import { IEditorDetails } from '../../models/ieditor-details';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, Observable, of, startWith } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+
 import { IBookAuthor } from '../../../shared/models/books/ibook-author';
 import { IReadBook } from '../../../shared/models/books/iread-book';
+
+import { IAddBookRequestDto } from '../../models/add-book-request-dto';
+import { IAddBookResponseDto } from '../../models/add-book-response-dto';
+import { NewBookBasics } from '../../models/new-book-basics';
+import { NewBook } from '../../models/new-book';
+import { BookEditorService } from '../../services/book-editor-service';
+
+import { LoggedInService } from '../../../shared/services/logged-in.service';
+
 
 @Component({
   standalone: false,  // this is now required when using NgModule
@@ -49,6 +56,7 @@ import { IReadBook } from '../../../shared/models/books/iread-book';
 export class AddBookStepperComponent implements OnInit, AfterViewInit {
 
   private _bookEditorService = inject(BookEditorService);
+  private _loggedInService = inject(LoggedInService);
   private _formBuilder = inject(FormBuilder);
   private _snackBar = inject(MatSnackBar);
 
@@ -334,38 +342,39 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
   }
 
   // Display
-
   newBookItem: NewBook | undefined = undefined;
   onNewBookDisplay() {
     console.log("Rx'ed selectedTag event for onNewBookDisplay");
 
-    let dateStringValue: string =
-      this.basicsFormGroup.controls['dateCtrl'].value as string;
-
-    let dateDateValue: Date = new Date(dateStringValue);
-    let pagesStringValue: string =
-      this.basicsFormGroup.controls['pagesCtrl'].value as string;
-    let pagesValue: number = +pagesStringValue;
-
-    this.newBookItem =
-      new NewBook(
-
-        /*date:*/ dateDateValue,
-        /*author:*/ this.basicsFormGroup.controls['authorCtrl'].value as string,
-        /*title:*/ this.basicsFormGroup.controls['titleCtrl'].value as string,
-        /*pages:*/ pagesValue,
-       /* nationality:*/ this.basicsFormGroup.controls['nationalityCtrl'].value as string,
-        /*originalLanguage:*/
-        this.basicsFormGroup.controls['originalLanguageCtrl'].value as string,
-        /*format:*/ this.basicsFormGroup.controls['formatCtrl'].value as string,
-
-        /*imageUrl:*/ this.imageFormGroup.controls['imageUrlCtrl'].value as string,
-
-        /*notes:*/ this.notesFormGroup.controls['notesCtrl'].value as string,
-       /* tags:*/ this.selectedTags
-      );
+    this.setupNewBook();
 
   }
+
+  private setupNewBook() {
+
+    // get the controls values 
+    let dateStringValue: string = this.basicsFormGroup.controls['dateCtrl'].value as string;
+    let dateDateValue: Date = new Date(dateStringValue);
+    let pagesStringValue: string = this.basicsFormGroup.controls['pagesCtrl'].value as string;
+    let pagesValue: number = +pagesStringValue;
+
+    // set up the new book item
+    this.newBookItem =
+        new NewBook(
+          dateDateValue,
+          this.basicsFormGroup.controls['authorCtrl'].value as string,
+          this.basicsFormGroup.controls['titleCtrl'].value as string,
+          pagesValue,
+          this.basicsFormGroup.controls['nationalityCtrl'].value as string,
+
+          this.basicsFormGroup.controls['originalLanguageCtrl'].value as string,
+          this.basicsFormGroup.controls['formatCtrl'].value as string,
+          this.imageFormGroup.controls['imageUrlCtrl'].value as string,
+          this.notesFormGroup.controls['notesCtrl'].value as string,
+          this.selectedTags,
+          this._loggedInService.loggedInUserId
+        );
+    }
 
   public newBookItemAuthor(): string
   { return this.newBookItem ? this.newBookItem.author : ''; }
@@ -375,6 +384,11 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
   { return this.newBookItem ? this.newBookItem.title : ''; }
   public newBookItemDate(): Date
   { return this.newBookItem ? this.newBookItem.date : new Date(); }
+  public newBookItemDateString(): string
+  {
+    let date: Date = this.newBookItemDate();
+    return date.toLocaleDateString();
+  }
   public newBookItemImageUrl(): string
   { return this.newBookItem ? this.newBookItem.imageUrl : ''; }
   public newBookItemNotes(): string
@@ -385,15 +399,57 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
   { return this.newBookItem ? this.newBookItem.nationality : ''; }
   public newBookItemFormat(): string
   { return this.newBookItem ? this.newBookItem.format : ''; }
-
   public newBookItemTags(): string[]
   { return this.newBookItem ? this.newBookItem.tags : []; } 
 
-
   // Add
   onAddNewBook() {
-    console.log("Rx'ed selectedTag event for onAddNewBook"); }
 
+    // set up the new book
+    this.setupNewBook();
+    console.log("Called onAddNewBook :\n", JSON.stringify(this.newBookItem));
+
+    if (this.newBookItem !== undefined) {
+
+      let request: IAddBookRequestDto = {
+        date: this.newBookItemDate(),
+        author: this.newBookItemAuthor(),
+        title: this.newBookItemTitle(),
+        pages: this.newBookItemPages(),
+        nationality: this.newBookItemNationality(),
+        originalLanguage: this.newBookItemOriginalLanguage(),
+        format: this.newBookItemFormat(),
+        imageUrl: this.newBookItemImageUrl(),
+        note: this.newBookItemNotes(),
+        tags: this.newBookItemTags(),
+        userId: this._loggedInService.loggedInUserId
+      };
+
+      console.log("Calling addBook with request :\n", JSON.stringify(request));
+
+        this._bookEditorService
+          .addBook(request)
+          .subscribe(
+            resp => {
+              console.log('Rxed resp:', JSON.stringify(resp));
+              if (resp !== null && resp !== undefined) {
+
+                // got the data ok 
+                //this._editorDetails = resp;
+
+                //this.setupAuthorNames();
+                //this.setupLanguages();
+                //this.setupNations();
+                //this.setupTags();
+              }
+              else {
+
+                // an error occured
+                this.openSnackBar('Get editor details failed: ', 'OK');
+              }
+            });
+    }
+  }
 
   readonly announcer = inject(LiveAnnouncer);
 }

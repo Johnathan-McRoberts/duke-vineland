@@ -26,5 +26,25 @@ namespace DukeVineland.Server.Controllers
 
             return Ok(editorDetails);
         }
+
+        /// <summary>
+        /// Adds a new user book read.
+        /// </summary>
+        /// <param name="bookReadAddRequest">The new book read to try to add.</param>
+        /// <returns>The action result.</returns>
+        [HttpPost]
+        [Route("add-book")]
+        public async Task<IActionResult> Post([FromBody] AddBookRequestDto bookReadAddRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            AddBookResponseDto response =
+                await _bookEditorService.AddNewBookRead(bookReadAddRequest);
+
+            return Ok(response);
+        }
     }
 }

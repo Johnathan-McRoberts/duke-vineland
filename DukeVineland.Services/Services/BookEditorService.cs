@@ -64,5 +64,11 @@ namespace DukeVineland.Services.Services
 
             return trimmed.Distinct().OrderBy(x => x).ToList().ToArray();
         }
+
+        public async Task<AddBookResponseDto> AddNewBookRead(
+            AddBookRequestDto bookReadAddRequest)
+        {
+            return new AddBookResponseDto();
+        }
     }
 }

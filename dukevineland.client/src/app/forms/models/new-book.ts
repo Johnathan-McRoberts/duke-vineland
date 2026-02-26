@@ -14,5 +14,6 @@ export class NewBook {
     public notes: string,
     public tags: string[],
 
+    public userId: string,
   ) { }
 }
