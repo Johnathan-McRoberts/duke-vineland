@@ -5,6 +5,7 @@ using DukeVineland.Dtos.TablesDtos;
 using DukeVineland.Repositories;
 
 using DukeVineland.Services.Interfaces;
+using DukeVineland.Services.Utilities;
 
 namespace DukeVineland.Services.Services
 {
@@ -112,31 +113,11 @@ namespace DukeVineland.Services.Services
 
             foreach (BookRead book in allBooks)
             {
-                booksRead.Add(GetReadBook(book));
+                booksRead.Add(BooksUtilities.GetReadBook(book));
             }
 
             return booksRead;
 
-        }
-
-        private static ReadBook GetReadBook(BookRead book)
-        {
-            return new ReadBook()
-            {
-                Date = book.Date,
-                DateString = book.DateString,
-                Author = book.Author,
-                Title = book.Title,
-                Pages = book.Pages,
-                Format = book.Format.ToString(),
-                ImageUrl = book.ImageUrl,
-                Nationality = book.Nationality,
-                OriginalLanguage = book.OriginalLanguage,
-                Notes = book.Note,
-                Tags = book.Tags.ToArray(),
-                User = book.User,
-                Id = book.Id.ToString()
-            };
         }
 
         public async Task<List<BookAuthor>> GetBookAuthors()
@@ -175,7 +156,7 @@ namespace DukeVineland.Services.Services
             author.TotalPages += book.Pages;
 
             List<ReadBook> books = author.Books.ToList();
-            books.Add(GetReadBook(book));
+            books.Add(BooksUtilities.GetReadBook(book));
             author.Books = books.ToArray();
         }
     }

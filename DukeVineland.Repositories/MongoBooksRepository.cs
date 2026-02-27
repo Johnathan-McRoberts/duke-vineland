@@ -21,6 +21,7 @@ namespace DukeVineland.Repositories
             _database = _client.GetDatabase("books_read");
             _collection = _database.GetCollection<BookRead>("books");
         }
+
         public async Task<List<BookRead>> GetAllBooksRead()
         {
             // This is a query to get everything. 
@@ -31,6 +32,18 @@ namespace DukeVineland.Repositories
             List<BookRead> books = await _collection.Find(filter).ToListAsync();
 
             return books;
+        }
+
+        public async Task<BookRead?> AddBookRead(BookRead newItem)
+        {
+            await _collection.InsertOneAsync(newItem);
+            return (await GetAllBooksRead())
+                        .FirstOrDefault(
+                            x =>
+                                x.DateString == newItem.DateString &&
+                                x.Author == newItem.Author &&
+                                x.Title == newItem.Title &&
+                                x.Pages == newItem.Pages);
         }
     }
 }

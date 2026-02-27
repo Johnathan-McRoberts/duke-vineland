@@ -5,5 +5,7 @@ namespace DukeVineland.Repositories
     public interface IMongoUsersRepository
     {
         Task<User?> GetUser(string name);
+
+        Task<User?> GetUserById(string id);
     }
 }

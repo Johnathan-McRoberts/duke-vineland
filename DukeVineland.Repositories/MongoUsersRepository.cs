@@ -1,4 +1,5 @@
-﻿using DukeVineland.Domain.Users;
+﻿using DukeVineland.Domain.Books;
+using DukeVineland.Domain.Users;
 using DukeVineland.Dtos.Configuration;
 
 using MongoDB.Driver;
@@ -29,6 +30,16 @@ namespace DukeVineland.Repositories
                 Builders<User>.Filter.Eq("name", name);
 
             return await _collection.Find(filter).FirstOrDefaultAsync();
+        }
+
+        public async Task<User?> GetUserById(string id)
+        {
+            // This is a query to get everything. 
+            FilterDefinition<User> filter =
+                Builders<User>.Filter.Empty;
+
+            return (await _collection.Find(filter).ToListAsync())
+                        .FirstOrDefault(x => x.Id.ToString() == id);
         }
     }
 }

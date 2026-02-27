@@ -5,7 +5,7 @@ import {
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   FormControl,
@@ -27,11 +27,8 @@ import { map, Observable, of, startWith } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
-import { IBookAuthor } from '../../../shared/models/books/ibook-author';
-import { IReadBook } from '../../../shared/models/books/iread-book';
-
 import { IAddBookRequestDto } from '../../models/add-book-request-dto';
-import { IAddBookResponseDto } from '../../models/add-book-response-dto';
+import { IAddBookResponseDto, BookReadAddResponseCode } from '../../models/add-book-response-dto';
 import { NewBookBasics } from '../../models/new-book-basics';
 import { NewBook } from '../../models/new-book';
 import { BookEditorService } from '../../services/book-editor-service';
@@ -55,6 +52,7 @@ import { LoggedInService } from '../../../shared/services/logged-in.service';
 })
 export class AddBookStepperComponent implements OnInit, AfterViewInit {
 
+  private _router = inject(Router);
   private _bookEditorService = inject(BookEditorService);
   private _loggedInService = inject(LoggedInService);
   private _formBuilder = inject(FormBuilder);
@@ -133,7 +131,7 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
   }
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+    this._snackBar.open(message, action, { "duration": 5000 });
   }
 
   // Authors
@@ -199,8 +197,7 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
 
     if (this._editorDetails !== null &&
       this._editorDetails !== undefined &&
-      this._editorDetails.countryNames !== null)
-    {
+      this._editorDetails.countryNames !== null) {
       this.optionForNations = this._editorDetails.countryNames;
       this.filteredNationOptions = of(this.optionForNations);
     }
@@ -215,8 +212,7 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
   public get loading(): boolean { return this._editorDetails === undefined; }
   public get hasData(): boolean { return !this.loading; }
 
-  public get canShowDetail(): boolean
-  {
+  public get canShowDetail(): boolean {
     return !this.loading &&
       this.basicsFormGroup.valid &&
       this.imageFormGroup.valid &&
@@ -227,7 +223,7 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
 
   // Tags
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  readonly initialTags: string[] = []; 
+  readonly initialTags: string[] = [];
   readonly currentTag = model('');
   readonly tags = signal(this.initialTags);
   allTags: string[] = [];
@@ -245,8 +241,7 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
 
     if (this._editorDetails !== null &&
       this._editorDetails !== undefined &&
-      this._editorDetails.tags !== null)
-    {
+      this._editorDetails.tags !== null) {
       this.allAvailableTags = this._editorDetails.tags;
 
       this.allTags = [];
@@ -360,47 +355,36 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
 
     // set up the new book item
     this.newBookItem =
-        new NewBook(
-          dateDateValue,
-          this.basicsFormGroup.controls['authorCtrl'].value as string,
-          this.basicsFormGroup.controls['titleCtrl'].value as string,
-          pagesValue,
-          this.basicsFormGroup.controls['nationalityCtrl'].value as string,
+      new NewBook(
+        dateDateValue,
+        this.basicsFormGroup.controls['authorCtrl'].value as string,
+        this.basicsFormGroup.controls['titleCtrl'].value as string,
+        pagesValue,
+        this.basicsFormGroup.controls['nationalityCtrl'].value as string,
 
-          this.basicsFormGroup.controls['originalLanguageCtrl'].value as string,
-          this.basicsFormGroup.controls['formatCtrl'].value as string,
-          this.imageFormGroup.controls['imageUrlCtrl'].value as string,
-          this.notesFormGroup.controls['notesCtrl'].value as string,
-          this.selectedTags,
-          this._loggedInService.loggedInUserId
-        );
-    }
+        this.basicsFormGroup.controls['originalLanguageCtrl'].value as string,
+        this.basicsFormGroup.controls['formatCtrl'].value as string,
+        this.imageFormGroup.controls['imageUrlCtrl'].value as string,
+        this.notesFormGroup.controls['notesCtrl'].value as string,
+        this.selectedTags,
+        this._loggedInService.loggedInUserId
+      );
+  }
 
-  public newBookItemAuthor(): string
-  { return this.newBookItem ? this.newBookItem.author : ''; }
-  public newBookItemPages(): number
-  { return this.newBookItem ? this.newBookItem.pages : 0; }
-  public newBookItemTitle(): string
-  { return this.newBookItem ? this.newBookItem.title : ''; }
-  public newBookItemDate(): Date
-  { return this.newBookItem ? this.newBookItem.date : new Date(); }
-  public newBookItemDateString(): string
-  {
+  public newBookItemAuthor(): string { return this.newBookItem ? this.newBookItem.author : ''; }
+  public newBookItemPages(): number { return this.newBookItem ? this.newBookItem.pages : 0; }
+  public newBookItemTitle(): string { return this.newBookItem ? this.newBookItem.title : ''; }
+  public newBookItemDate(): Date { return this.newBookItem ? this.newBookItem.date : new Date(); }
+  public newBookItemDateString(): string {
     let date: Date = this.newBookItemDate();
     return date.toLocaleDateString();
   }
-  public newBookItemImageUrl(): string
-  { return this.newBookItem ? this.newBookItem.imageUrl : ''; }
-  public newBookItemNotes(): string
-  { return this.newBookItem ? this.newBookItem.notes : ''; }
-  public newBookItemOriginalLanguage(): string
-  { return this.newBookItem ? this.newBookItem.originalLanguage : ''; }
-  public newBookItemNationality(): string
-  { return this.newBookItem ? this.newBookItem.nationality : ''; }
-  public newBookItemFormat(): string
-  { return this.newBookItem ? this.newBookItem.format : ''; }
-  public newBookItemTags(): string[]
-  { return this.newBookItem ? this.newBookItem.tags : []; } 
+  public newBookItemImageUrl(): string { return this.newBookItem ? this.newBookItem.imageUrl : ''; }
+  public newBookItemNotes(): string { return this.newBookItem ? this.newBookItem.notes : ''; }
+  public newBookItemOriginalLanguage(): string { return this.newBookItem ? this.newBookItem.originalLanguage : ''; }
+  public newBookItemNationality(): string { return this.newBookItem ? this.newBookItem.nationality : ''; }
+  public newBookItemFormat(): string { return this.newBookItem ? this.newBookItem.format : ''; }
+  public newBookItemTags(): string[] { return this.newBookItem ? this.newBookItem.tags : []; }
 
   // Add
   onAddNewBook() {
@@ -427,27 +411,37 @@ export class AddBookStepperComponent implements OnInit, AfterViewInit {
 
       console.log("Calling addBook with request :\n", JSON.stringify(request));
 
-        this._bookEditorService
-          .addBook(request)
-          .subscribe(
-            resp => {
-              console.log('Rxed resp:', JSON.stringify(resp));
-              if (resp !== null && resp !== undefined) {
+      this._bookEditorService
+        .addBook(request)
+        .subscribe(
+          resp => {
+            console.log('Rxed add book resp:', JSON.stringify(resp));
 
-                // got the data ok 
-                //this._editorDetails = resp;
+            if (resp !== null && resp !== undefined) {
 
-                //this.setupAuthorNames();
-                //this.setupLanguages();
-                //this.setupNations();
-                //this.setupTags();
+              if (BookReadAddResponseCode.Success == resp.errorCode) {
+
+                // pop up the message that added ok
+                this.openSnackBar('This book has been sucessfully added', 'OK');
+
+                // navigate to tallies so it is shown
+                this._router.navigate(['/tables']);
               }
               else {
+                // get a valid string for the failure reason
+                let failReason: string =
+                  (resp.failReason) ? resp.failReason : 'error code = ' + resp.errorCode;
 
                 // an error occured
-                this.openSnackBar('Get editor details failed: ', 'OK');
+                this.openSnackBar('Add book has failed: ' + failReason, 'OK');
               }
-            });
+            }
+            else {
+
+              // an error occured
+              this.openSnackBar('Add book has failed', 'OK');
+            }
+          });
     }
   }
 

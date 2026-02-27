@@ -86,19 +86,15 @@
         <mat-form-field>
           <mat-label>Format</mat-label>
           <mat-select matInput placeholder="Format" formControlName="formatCtrl" required>
-            <mat-option value="book">Book</mat-option>
-            <mat-option value="comic">Comic</mat-option>
-            <mat-option value="audio">Audio book</mat-option>
+            <mat-option value="Book">Book</mat-option>
+            <mat-option value="Comic">Comic</mat-option>
+            <mat-option value="Audio">Audio book</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
       <div>
-        <p>Form Value: {{ basicsFormGroup.value | json }}</p>
 
-        <p>Form Status: {{ basicsFormGroup.status }}</p>
-
-        <p>Go to a different step to see the error state</p>
         <button mat-raised-button color="primary"
                 matStepperNext [disabled]="!basicsFormGroup.valid">
           Next
@@ -127,11 +123,6 @@
       </div>
 
       <div>
-        <p>Form Value: {{ imageFormGroup.value | json }}</p>
-
-        <p>Form Status: {{ imageFormGroup.status }}</p>
-
-        <p>Go to a different step to see the error state</p>
 
         <div class="row">
           <div class="col-sm-4">
@@ -197,11 +188,7 @@
 
 
       </mat-form-field>
-      <p>Form Value: {{ notesFormGroup.value | json }}</p>
 
-      <p>Form Status: {{ notesFormGroup.status }}</p>
-
-      <p>You are now done.</p>
     </form>
     <div>
       <div class="container">

@@ -7,5 +7,7 @@ namespace DukeVineland.Repositories
         public string Name { get; }
 
         Task<List<BookRead>> GetAllBooksRead();
+
+        Task<BookRead?> AddBookRead(BookRead newItem);
     }
 }
